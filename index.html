@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8ed">
+  <title>Minik Maceralar — Eğlence burada başlıyor!</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #262343;
+      --muted: #716e84;
+      --pink: #ff6f91;
+      --yellow: #ffd166;
+      --purple: #7658e8;
+      --paper: #fffdf9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 9% 12%, rgba(255, 209, 102, .26), transparent 25rem),
+        radial-gradient(ellipse at 93% 28%, rgba(255, 111, 145, .16), transparent 24rem),
+        #fff8ed;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      position: relative;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 36px;
+    }
+
+    .topbar,
+    .brand,
+    .top-note,
+    .section-heading,
+    .link-card,
+    .card-main,
+    .card-bottom,
+    .footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar,
+    .section-heading,
+    .card-bottom,
+    .footer {
+      justify-content: space-between;
+    }
+
+    .brand {
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -.3px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      background: var(--yellow);
+      box-shadow: 3px 3px 0 var(--ink);
+      font-size: 21px;
+      transform: rotate(-7deg);
+    }
+
+    .top-note {
+      gap: 8px;
+      padding: 9px 14px;
+      border: 1px solid rgba(38, 35, 67, .1);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .72);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .top-note span {
+      color: #35a878;
+      font-size: 10px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 85px 0 72px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border: 1px solid rgba(118, 88, 232, .16);
+      border-radius: 999px;
+      background: #f0ebff;
+      color: #6348cd;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 22px auto 16px;
+      font-size: clamp(42px, 8vw, 78px);
+      font-weight: 1000;
+      letter-spacing: -5px;
+      line-height: .98;
+    }
+
+    h1 .highlight {
+      position: relative;
+      display: inline-block;
+      color: var(--pink);
+      white-space: nowrap;
+    }
+
+    h1 .highlight::after {
+      position: absolute;
+      z-index: -1;
+      right: -3px;
+      bottom: 3px;
+      left: -3px;
+      height: 13px;
+      border-radius: 10px;
+      background: var(--yellow);
+      content: "";
+      transform: rotate(-2deg);
+    }
+
+    .hero-copy {
+      max-width: 460px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .hero-sticker {
+      position: absolute;
+      top: 114px;
+      right: 6%;
+      display: grid;
+      width: 68px;
+      height: 68px;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 22px;
+      background: #b7efcf;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 32px;
+      transform: rotate(12deg);
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    .hero-sparkle {
+      position: absolute;
+      top: 150px;
+      left: 10%;
+      color: #ff9f43;
+      font-size: 35px;
+      animation: bob 2.4s ease-in-out infinite reverse;
+    }
+
+    .links-section {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: -.5px;
+    }
+
+    .count {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .link-card {
+      min-height: 174px;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 25px 28px;
+      border: 2px solid var(--ink);
+      border-radius: 25px;
+      background: var(--paper);
+      box-shadow: 6px 6px 0 var(--ink);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .link-card:hover,
+    .link-card:focus-visible {
+      box-shadow: 9px 10px 0 var(--ink);
+      outline: none;
+      transform: translate(-3px, -4px) rotate(-.3deg);
+    }
+
+    .link-card.is-locked {
+      cursor: not-allowed;
+    }
+
+    .lock-status {
+      margin-top: 6px !important;
+      color: #7658e8 !important;
+      font-size: 11px !important;
+      font-weight: 800;
+    }
+
+    .lock-progress {
+      display: block;
+      width: min(250px, 100%);
+      height: 7px;
+      margin-top: 8px;
+      overflow: hidden;
+      border: 0;
+      border-radius: 999px;
+      background: #eee9fa;
+      accent-color: var(--purple);
+    }
+
+    .lock-progress::-webkit-progress-bar {
+      border-radius: 999px;
+      background: #eee9fa;
+    }
+
+    .lock-progress::-webkit-progress-value {
+      border-radius: 999px;
+      background: var(--purple);
+    }
+
+    .lock-progress::-moz-progress-bar {
+      border-radius: 999px;
+      background: var(--purple);
+    }
+
+    .card-main {
+      min-width: 0;
+      gap: 20px;
+    }
+
+    .card-icon {
+      display: grid;
+      flex: 0 0 86px;
+      width: 86px;
+      height: 86px;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 23px;
+      background: #ffe4a8;
+      font-size: 39px;
+      transform: rotate(-5deg);
+    }
+
+    .card-info {
+      min-width: 0;
+    }
+
+    .card-number {
+      display: block;
+      margin-bottom: 7px;
+      color: #8d87a2;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .card-info h3 {
+      margin: 0 0 7px;
+      font-size: 27px;
+      letter-spacing: -1px;
+    }
+
+    .card-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .card-info .creator {
+      margin-top: 5px;
+      color: #a29bb4;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .card-info .activity-prompt {
+      display: none;
+      width: fit-content;
+      margin-top: 7px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #f0ebff;
+      color: #6348cd;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .card-info .activity-prompt.is-visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .activity-prompt.is-visible::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #35a878;
+      box-shadow: 0 0 0 0 rgba(53, 168, 120, .45);
+      content: "";
+      animation: activity-pulse 1.8s ease-out infinite;
+    }
+
+    @keyframes activity-pulse {
+      70%, 100% {
+        box-shadow: 0 0 0 6px rgba(53, 168, 120, 0);
+      }
+    }
+
+    .card-bottom {
+      flex: 0 0 auto;
+      gap: 13px;
+      color: var(--purple);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .arrow {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 15px;
+      background: #f0ebff;
+      font-size: 21px;
+      transition: transform .2s ease;
+    }
+
+    .link-card:hover .arrow,
+    .link-card:focus-visible .arrow {
+      transform: translate(3px, -3px);
+    }
+
+    .comments-section {
+      max-width: 840px;
+      margin: 54px auto 0;
+    }
+
+    .comments-section h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: -.5px;
+    }
+
+    .comments-note,
+    .comments-status,
+    .empty-comments {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .comments-note {
+      margin: 8px 0 18px;
+    }
+
+    .comment-form {
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+      border: 1px solid rgba(38, 35, 67, .12);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .76);
+    }
+
+    .comment-form label {
+      display: grid;
+      gap: 6px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid rgba(38, 35, 67, .2);
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+    }
+
+    .comment-form textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .comment-form input:focus,
+    .comment-form textarea:focus {
+      border-color: var(--purple);
+      outline: 3px solid rgba(118, 88, 232, .15);
+    }
+
+    .comment-submit {
+      justify-self: start;
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--purple);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .comment-submit:hover {
+      background: #6348cd;
+    }
+
+    .comments-status {
+      min-height: 1.5em;
+      margin: 0;
+    }
+
+    .comment-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .comment-item {
+      padding: 16px 18px;
+      border: 1px solid rgba(38, 35, 67, .1);
+      border-radius: 16px;
+      background: var(--paper);
+    }
+
+    .comment-item header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .comment-item h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .comment-item time {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .comment-item p {
+      margin: 9px 0 0;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .empty-comments {
+      margin: 16px 0 0;
+      padding: 18px;
+      border: 1px dashed rgba(38, 35, 67, .2);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .footer {
+      max-width: 840px;
+      margin: 54px auto 0;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(38, 35, 67, .2);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer .made-with {
+      color: var(--pink);
+      font-weight: 900;
+    }
+
+    @keyframes bob {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        width: min(100% - 28px, 520px);
+        padding-top: 18px;
+      }
+
+      .top-note {
+        padding: 8px 10px;
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 79px 0 56px;
+      }
+
+      .hero-sticker {
+        top: 17px;
+        right: 8px;
+        width: 49px;
+        height: 49px;
+        border-radius: 16px;
+        font-size: 25px;
+      }
+
+      .hero-sparkle {
+        top: 31px;
+        left: 8px;
+        font-size: 27px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero-copy {
+        max-width: 340px;
+        font-size: 14px;
+      }
+
+      .link-card {
+        min-height: 150px;
+        gap: 10px;
+        padding: 19px 16px;
+        border-radius: 21px;
+      }
+
+      .card-main {
+        gap: 13px;
+      }
+
+      .card-icon {
+        flex-basis: 62px;
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        font-size: 29px;
+      }
+
+      .card-info h3 {
+        font-size: 22px;
+      }
+
+      .card-info p {
+        font-size: 12px;
+      }
+
+      .comment-item header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .card-bottom {
+        gap: 0;
+        font-size: 0;
+      }
+
+      .arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>Minik Maceralar</span>
+      </div>
+      <div class="top-note"><span aria-hidden="true">●</span> Güzel şeyler burada</div>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <span class="hero-sparkle" aria-hidden="true">✳</span>
+      <span class="hero-sticker" aria-hidden="true">🚀</span>
+      <div class="eyebrow"><span aria-hidden="true">✦</span> Tıkla, keşfet, eğlen!</div>
+      <h1 id="page-title">Sıradaki maceran<br><span class="highlight">bir tık uzakta.</span></h1>
+      <p class="hero-copy">En sevdiğim internet köşeleri burada! Birini seç, yeni bir şeyler keşfet. ✨</p>
+    </section>
+
+    <section class="links-section" aria-labelledby="links-title">
+      <div class="section-heading">
+        <h2 id="links-title">Keşfedilecek yerler</h2>
+        <span class="count">7 güzel bağlantı</span>
+      </div>
+
+      <a class="link-card" data-game-id="fc78" href="https://fc78.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="FC78 sitesini yeni sekmede aç">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true">🎮</div>
+          <div class="card-info">
+            <span class="card-number">01 · Hemen göz at</span>
+            <h3>FC78</h3>
+            <p>fc78.vercel.app</p>
+            <p class="creator">mirmirmir oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card" data-game-id="agbot" href="https://agbot-henna.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Agbot sitesini yeni sekmede aç" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #d7efff;">🤖</div>
+          <div class="card-info">
+            <span class="card-number">02 · Hemen göz at</span>
+            <h3>Agbot</h3>
+            <p>agbot-henna.vercel.app</p>
+            <p class="creator">Agah oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card" data-game-id="60-seconds" href="https://60-seconds.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="60 Seconds sitesini yeni sekmede aç" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #ffe0db;">⏱️</div>
+          <div class="card-info">
+            <span class="card-number">03 · Hemen göz at</span>
+            <h3>60 Seconds</h3>
+            <p>60-seconds.vercel.app</p>
+            <p class="creator">mirmirmir oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card" id="yusuf-game" data-game-id="claude-artifact" href="https://claude.ai/artifact/S3NAxi9oh6UTUxKEPdASnD" target="_blank" rel="noopener noreferrer" aria-label="Yusuf'un Claude Artifact sayfasını yeni sekmede aç; futbol kilidini açma süresini başlatır" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #eadfff;">✨</div>
+          <div class="card-info">
+            <span class="card-number">04 · Hemen göz at</span>
+            <h3>Claude Artifact</h3>
+            <p>claude.ai/artifact</p>
+            <p class="creator">Yusuf oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card" data-game-id="ders-konusu" href="https://claude.ai/artifact/KuGEF4uf6yEJD5XzWa6d62" target="_blank" rel="noopener noreferrer" aria-label="Ders Konusu sayfasını yeni sekmede aç" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #e0f5dd;">📚</div>
+          <div class="card-info">
+            <span class="card-number">05 · Hemen göz at</span>
+            <h3>Ders Konusu</h3>
+            <p>claude.ai/artifact</p>
+            <p class="creator">Yusuf oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card is-locked" id="football-card" data-game-id="football" href="https://fotbal-ten.vercel.app/" target="_blank" rel="noopener noreferrer" aria-disabled="true" aria-label="Futbol oyunu kilitli; Yusuf'un Claude Artifact bağlantısına tıkla ve bu sayfada 10 dakika etkin kal" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #d7f3df;">⚽</div>
+          <div class="card-info">
+            <span class="card-number">06 · Kilitli oyun</span>
+            <h3>Futbol</h3>
+            <p>fotbal-ten.vercel.app</p>
+            <p class="lock-status" id="football-status">Yusuf'un Claude Artifact oyununa tıkla; bu sayfa etkin kaldıkça süre ilerler.</p>
+            <progress class="lock-progress" id="football-progress" max="600" value="0" aria-label="Futbol oyununun kilidini açma ilerlemesi"></progress>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span id="football-action">🔒 Kilitli</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+
+      <a class="link-card" data-game-id="whatsapp" href="https://wwwhastapp.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp sitesini yeni sekmede aç" style="margin-top: 20px;">
+        <div class="card-main">
+          <div class="card-icon" aria-hidden="true" style="background: #d7f3df;">💬</div>
+          <div class="card-info">
+            <span class="card-number">07 · Hemen göz at</span>
+            <h3>WhatsApp</h3>
+            <p>wwwhastapp.vercel.app</p>
+            <p class="creator">kanfghhh oluşturdu ✿</p>
+            <p class="activity-prompt" aria-hidden="true"></p>
+          </div>
+        </div>
+        <div class="card-bottom">
+          <span>Keşfet</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+    </section>
+
+    <section class="comments-section" aria-labelledby="comments-title">
+      <h2 id="comments-title">Yorumlar 💬</h2>
+      <p class="comments-note">Yorumlar bu cihazda saklanır ve yalnızca burada görünür. Aşağıdakiler eğlence amaçlı kurgusal yorumlardır.</p>
+      <form class="comment-form" id="comment-form">
+        <label for="comment-name">
+          Adın
+          <input id="comment-name" name="name" type="text" maxlength="40" autocomplete="name" required>
+        </label>
+        <label for="comment-body">
+          Yorumun
+          <textarea id="comment-body" name="body" maxlength="500" required></textarea>
+        </label>
+        <button class="comment-submit" type="submit">Yorumu ekle ✨</button>
+        <p class="comments-status" id="comments-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="comment-list" id="comment-list" aria-live="polite"></div>
+      <p class="empty-comments" id="empty-comments">Henüz yorum yok. İlk yorumu sen yaz!</p>
+      <div class="comment-list" id="fictional-comment-list" aria-label="Eğlence amaçlı kurgusal yorumlar"></div>
+    </section>
+
+    <footer class="footer">
+      <span>Daha çok keşif yolda…</span>
+      <span class="made-with">Neşeyle yapıldı ✿</span>
+    </footer>
+  </main>
+  <script>
+    const gameCards = Array.from(document.querySelectorAll(".link-card[data-game-id]:not(#football-card)"));
+    const gameCountKey = "minik-maceralar-game-counts-v2";
+    const gameCounts = Object.fromEntries(gameCards.map((card) => [card.dataset.gameId, 0]));
+
+    function randomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function renderGameCounts() {
+      gameCards.forEach((card) => {
+        const prompt = card.querySelector(".activity-prompt");
+        const count = gameCounts[card.dataset.gameId];
+        prompt.classList.add("is-visible");
+        prompt.textContent = `${count} kişi oynadı`;
+      });
+    }
+
+    function saveGameCounts() {
+      try {
+        localStorage.setItem(gameCountKey, JSON.stringify(gameCounts));
+      } catch (error) {
+        console.warn("Oyun sayaçları bu cihazda kaydedilemedi.", error);
+      }
+    }
+
+    try {
+      const savedCounts = JSON.parse(localStorage.getItem(gameCountKey) || "null");
+      if (savedCounts && typeof savedCounts === "object" && !Array.isArray(savedCounts)) {
+        gameCards.forEach((card) => {
+          const count = savedCounts[card.dataset.gameId];
+          if (Number.isSafeInteger(count) && count >= 0) {
+            gameCounts[card.dataset.gameId] = count;
+          } else {
+            gameCounts[card.dataset.gameId] = randomNumber(12, 86);
+          }
+        });
+      } else {
+        gameCards.forEach((card) => {
+          gameCounts[card.dataset.gameId] = randomNumber(12, 86);
+        });
+      }
+    } catch (error) {
+      gameCards.forEach((card) => {
+        gameCounts[card.dataset.gameId] = randomNumber(12, 86);
+      });
+      console.warn("Oyun sayaçları bu cihazdan okunamadı.", error);
+    }
+
+    renderGameCounts();
+    saveGameCounts();
+
+    gameCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        gameCounts[card.dataset.gameId] += 1;
+        renderGameCounts();
+        saveGameCounts();
+      });
+    });
+
+    const commentStorageKey = "minik-maceralar-comments";
+    const commentForm = document.getElementById("comment-form");
+    const commentList = document.getElementById("comment-list");
+    const commentsStatus = document.getElementById("comments-status");
+    const emptyComments = document.getElementById("empty-comments");
+    const fictionalCommentList = document.getElementById("fictional-comment-list");
+    let comments = [];
+    const fictionalComments = [
+      { name: "jfjjf", body: "Oyunlar cok güzel olmuş FC78 favorim oldu 🎮" },
+      { name: "kann", body: "Agbot baya eglenceli tekrar oynicam 🤖" },
+      { name: "atşe", body: "Hepsini denedim tasarımlar cok tatlıı ✨" },
+      { name: "xdddd", body: "bi tık attım maceraya daldım haha 😄" },
+      { name: "mrv", body: "60 seconds baya sardı bi bölüm daha oynadım 😅" },
+      { name: "oyuncu_7", body: "Ders konusu oyunu düşündüğümden iyi çıktıı 📚" },
+      { name: "pofuduk", body: "Agbotla konuşmak cok komikti yaa 😂" },
+      { name: "kaanx", body: "Futbolun kilidini açınca ilk onu oynucam ⚽" },
+      { name: "miniktilki", body: "Renkler ve kartlar cok hoşuma gitti elinize sağlık 🌟" },
+      { name: "f1j1", body: "Siteye girince hangi oyunu açsam diye kaldım hepsi güzel 😎" }
+    ];
+    let lastFictionalCommentSet = "";
+
+    function renderFictionalComments() {
+      fictionalCommentList.replaceChildren();
+      const shuffled = [...fictionalComments];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+      }
+
+      const visibleComments = shuffled.slice(0, 4);
+      const currentSet = visibleComments.map((comment) => comment.name).join("|");
+      if (currentSet === lastFictionalCommentSet) {
+        [visibleComments[0], visibleComments[1]] = [visibleComments[1], visibleComments[0]];
+      }
+      lastFictionalCommentSet = visibleComments.map((comment) => comment.name).join("|");
+
+      visibleComments.forEach((comment) => {
+        const item = document.createElement("article");
+        item.className = "comment-item";
+        const header = document.createElement("header");
+        const name = document.createElement("h3");
+        name.textContent = comment.name;
+        header.append(name);
+        const body = document.createElement("p");
+        body.textContent = comment.body;
+        item.append(header, body);
+        fictionalCommentList.append(item);
+      });
+    }
+
+    renderFictionalComments();
+    window.setInterval(renderFictionalComments, 10 * 1000);
+
+    function renderComments() {
+      commentList.replaceChildren();
+      emptyComments.hidden = comments.length > 0;
+
+      comments.forEach((comment) => {
+        const item = document.createElement("article");
+        item.className = "comment-item";
+
+        const header = document.createElement("header");
+        const name = document.createElement("h3");
+        name.textContent = comment.name;
+        const date = document.createElement("time");
+        const createdAt = new Date(comment.createdAt);
+        date.dateTime = createdAt.toISOString();
+        date.textContent = new Intl.DateTimeFormat("tr-TR", {
+          dateStyle: "medium",
+          timeStyle: "short"
+        }).format(createdAt);
+        header.append(name, date);
+
+        const body = document.createElement("p");
+        body.textContent = comment.body;
+        item.append(header, body);
+        commentList.append(item);
+      });
+    }
+
+    try {
+      const savedComments = JSON.parse(localStorage.getItem(commentStorageKey) || "[]");
+      if (Array.isArray(savedComments)) {
+        comments = savedComments.filter((comment) =>
+          comment &&
+          typeof comment.name === "string" &&
+          typeof comment.body === "string" &&
+          typeof comment.createdAt === "string" &&
+          !Number.isNaN(Date.parse(comment.createdAt))
+        ).slice(0, 100);
+      }
+    } catch (error) {
+      commentsStatus.textContent = "Yorumlar okunamadı. Tarayıcı depolama ayarlarını kontrol et.";
+      console.warn("Yorumlar bu cihazdan okunamadı.", error);
+    }
+
+    renderComments();
+
+    commentForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(commentForm);
+      const name = String(formData.get("name") || "").trim();
+      const body = String(formData.get("body") || "").trim();
+      if (!name || !body) {
+        commentsStatus.textContent = "Adını ve yorumunu doldur.";
+        return;
+      }
+
+      const nextComments = [{
+        name: name.slice(0, 40),
+        body: body.slice(0, 500),
+        createdAt: new Date().toISOString()
+      }, ...comments].slice(0, 100);
+
+      try {
+        localStorage.setItem(commentStorageKey, JSON.stringify(nextComments));
+        comments = nextComments;
+        renderComments();
+        commentForm.reset();
+        commentsStatus.textContent = "Yorumun eklendi!";
+      } catch (error) {
+        commentsStatus.textContent = "Yorum kaydedilemedi. Tarayıcı depolama alanı dolu olabilir.";
+        console.warn("Yorum bu cihazda kaydedilemedi.", error);
+      }
+    });
+
+    window.addEventListener("storage", (event) => {
+      if (event.key !== commentStorageKey) return;
+      try {
+        const updatedComments = JSON.parse(event.newValue || "[]");
+        if (Array.isArray(updatedComments)) {
+          comments = updatedComments.filter((comment) =>
+            comment &&
+            typeof comment.name === "string" &&
+            typeof comment.body === "string" &&
+            typeof comment.createdAt === "string" &&
+            !Number.isNaN(Date.parse(comment.createdAt))
+          ).slice(0, 100);
+          renderComments();
+        }
+      } catch (error) {
+        commentsStatus.textContent = "Güncel yorumlar okunamadı.";
+        console.warn("Yorumlar diğer sekmeden güncellenemedi.", error);
+      }
+    });
+
+    function scheduleGameCountIncrease() {
+      const delay = [10, 15, 30][randomNumber(0, 2)];
+      window.setTimeout(() => {
+        if (document.visibilityState === "visible") {
+          const card = gameCards[randomNumber(0, gameCards.length - 1)];
+          gameCounts[card.dataset.gameId] += randomNumber(0, 1) === 0 ? 1 : 4;
+          renderGameCounts();
+          saveGameCounts();
+        }
+        scheduleGameCountIncrease();
+      }, delay * 1000);
+    }
+
+    scheduleGameCountIncrease();
+
+    const timerKey = "minik-maceralar-yusuf-active-seconds";
+    const durationSeconds = 10 * 60;
+    const yusufGameLink = document.getElementById("yusuf-game");
+    const footballCard = document.getElementById("football-card");
+    const footballStatus = document.getElementById("football-status");
+    const footballProgress = document.getElementById("football-progress");
+    const footballAction = document.getElementById("football-action");
+    let activeSeconds = 0;
+    let isTimerStarted = false;
+    let canPersist = true;
+    let wasVisible = document.visibilityState === "visible";
+    let lastTick = Date.now();
+
+    try {
+      const savedSeconds = Number(localStorage.getItem(timerKey));
+      activeSeconds = Number.isFinite(savedSeconds)
+        ? Math.min(durationSeconds, Math.max(0, savedSeconds))
+        : 0;
+      isTimerStarted = localStorage.getItem(timerKey + "-started") === "true";
+    } catch (error) {
+      canPersist = false;
+    }
+
+    function saveTimer() {
+      if (!canPersist) return;
+      try {
+        localStorage.setItem(timerKey, String(activeSeconds));
+        localStorage.setItem(timerKey + "-started", String(isTimerStarted));
+      } catch (error) {
+        canPersist = false;
+      }
+    }
+
+    function renderTimer() {
+      const unlocked = activeSeconds >= durationSeconds;
+      footballProgress.value = activeSeconds;
+      footballCard.setAttribute("aria-disabled", String(!unlocked));
+      footballCard.classList.toggle("is-locked", !unlocked);
+
+      if (unlocked) {
+        footballStatus.textContent = "Harika! Futbol oyununun kilidi açıldı.";
+        footballAction.textContent = "⚽ Oyna";
+        footballCard.setAttribute("aria-label", "Futbol oyununu yeni sekmede aç");
+      } else if (isTimerStarted) {
+        const remaining = Math.ceil(durationSeconds - activeSeconds);
+        const minutes = Math.floor(remaining / 60);
+        const seconds = String(remaining % 60).padStart(2, "0");
+        footballStatus.textContent = canPersist
+          ? `Kilit için kalan etkin süre: ${minutes}:${seconds}. Bu sayfa görünür ve etkin olmalı.`
+          : `Kalan etkin süre: ${minutes}:${seconds}. Kayıt kullanılamıyor; sayfayı kapatma.`;
+        footballAction.textContent = "🔒 Kilitli";
+      } else {
+        footballStatus.textContent = canPersist
+          ? "Yusuf'un Claude Artifact oyununa tıkla; bu sayfa etkin kaldıkça süre ilerler."
+          : "Sayaç kaydedilemiyor; Yusuf'un Claude Artifact oyununa tıklayarak başlat.";
+        footballAction.textContent = "🔒 Kilitli";
+      }
+    }
+
+    yusufGameLink.addEventListener("click", () => {
+      if (!isTimerStarted && activeSeconds < durationSeconds) {
+        isTimerStarted = true;
+        lastTick = Date.now();
+        wasVisible = document.visibilityState === "visible";
+        saveTimer();
+        renderTimer();
+      }
+    });
+
+    footballCard.addEventListener("click", (event) => {
+      if (activeSeconds < durationSeconds) {
+        event.preventDefault();
+        footballStatus.textContent = "Önce Yusuf'un Claude Artifact oyununa tıkla.";
+      }
+    });
+
+    function updateTimer() {
+      const now = Date.now();
+      if (wasVisible && isTimerStarted && activeSeconds < durationSeconds) {
+        activeSeconds = Math.min(durationSeconds, activeSeconds + (now - lastTick) / 1000);
+        saveTimer();
+      }
+      wasVisible = document.visibilityState === "visible";
+      lastTick = now;
+      renderTimer();
+    }
+
+    document.addEventListener("visibilitychange", updateTimer);
+    window.addEventListener("pagehide", updateTimer);
+    window.setInterval(updateTimer, 1000);
+    renderTimer();
+  </script>
+</body>
+</html>
